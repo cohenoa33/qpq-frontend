@@ -37,9 +37,13 @@ const ServiceNew = (props) => {
               placeholder="What is the URL of an image showcasing your offering?"
               value={props.img_url}
             />
-          </div>
-          <div className="submit-button">
-            <input type="submit" value="Submit" className="btn" />
+            <div className="submit-button-new-service">
+              <input
+                type="submit"
+                value="Submit"
+                className="submit-button-btn"
+              />
+            </div>
           </div>
         </div>
       </form>

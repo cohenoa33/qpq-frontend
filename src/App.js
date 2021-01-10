@@ -15,6 +15,7 @@ class App extends React.Component {
   state = {
     user: {},
     search: "",
+    services: [],
     newService: {
       name: "",
       value: "",
@@ -30,6 +31,10 @@ class App extends React.Component {
     if (localStorage.token) {
       api.auth.persist().then((json) => {
         this.handleAuthResponse(json);
+
+        api.services
+          .getServices()
+          .then((services) => this.setState({ services: services }));
       });
     } else {
       this.props.history.push("/login");
@@ -84,17 +89,28 @@ class App extends React.Component {
 
   handleSubmitNewServiceForm = (e) => {
     e.preventDefault();
+    let newService = this.state.newService;
 
-    let newService =
-      this.state.newService.img_url.length > 0
-        ? this.state.newService
-        : this.addImageToNewService(this.state.newService);
-
-    api.posts.postNewServiceOffering(newService).then((data) => {
-      alert(`${data.service.name} has been created`);
-      this.props.history.push("/services");
-    });
-    e.target.reset();
+    if (
+      newService.name &&
+      newService.value &&
+      newService.offeringDescription &&
+      newService.exchangeDescription
+    ) {
+      let newServiceUpdate = newService.img_url
+        ? newService
+        : this.addImageToNewService(newService);
+      api.posts.postNewServiceOffering(newServiceUpdate).then((data) => {
+        alert(`${data.service.name} has been created`);
+        let updateServices = this.state.services.concat(data.service);
+        this.setState({ services: updateServices });
+        this.props.history.push("/services");
+      });
+    } else {
+      alert(
+        "New Service is not valid: make sure you added name, value, description and what you want in exchange."
+      );
+    }
   };
   addImageToNewService = (service) => {
     service.img_url = "https://picsum.photos/200/300?random=5";
@@ -112,7 +128,6 @@ class App extends React.Component {
       },
     }));
   };
-  //service stuff ends here
 
   updateUserDetails = (user) => {
     this.setState({
@@ -120,15 +135,6 @@ class App extends React.Component {
       user: user,
     });
   };
-
-  // handleFormChange = (event) => {
-  //   this.setState({
-  //     user: {
-  //       ...this.state.user,
-  //       [event.target.name]: event.target.value,
-  //     },
-  //   });
-  // };
 
   renderLogin = () => (
     <Login
@@ -146,6 +152,7 @@ class App extends React.Component {
     <ServicesContainer
       search={this.state.search}
       currentUser={this.state.user}
+      services={this.state.services}
     />
   );
   renderProfilePage = () => (
@@ -163,11 +170,14 @@ class App extends React.Component {
   );
 
   renderNewService = () => (
-    <ServiceNew
-      newService={this.state.newService}
-      handleSubmitNewServiceForm={this.handleSubmitNewServiceForm}
-      handleOnChangeNewServiceForm={this.handleOnChangeNewServiceForm}
-    />
+    <>
+      <br />
+      <ServiceNew
+        newService={this.state.newService}
+        handleSubmitNewServiceForm={this.handleSubmitNewServiceForm}
+        handleOnChangeNewServiceForm={this.handleOnChangeNewServiceForm}
+      />
+    </>
   );
 
   render() {

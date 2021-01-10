@@ -18,23 +18,27 @@ class EditUserForm extends React.Component {
   };
 
   render() {
-
-    const { id, first_name, last_name, img_url, city, street, zipcode, state, email } = this.props.user;
+    const {
+      id,
+      first_name,
+      last_name,
+      img_url,
+      city,
+      street,
+      zipcode,
+      state,
+      email,
+    } = this.props.user;
     return (
       <div className="form-container">
         <form
           onSubmit={(event) =>
-            this.props.handleEditUserSubmit(
-              event,
-              this.state.user,
-              id
-            )
+            this.props.handleEditUserSubmit(event, this.state.user, id)
           }
         >
           <div className="register-form">
             <div className="profile-form-row">
-              <label for="first_name">First Name</label>
-              <b></b>
+              <label>First Name</label>
               <input
                 onChange={(event) => this.handleFormChange(event)}
                 type="text"
@@ -42,8 +46,7 @@ class EditUserForm extends React.Component {
                 placeholder={first_name}
                 value={this.state.first_name}
               />
-              <p></p>
-              <label for="last_name">Last Name</label>
+              <label>Last Name</label>
               <input
                 onChange={(event) => this.handleFormChange(event)}
                 type="text"
@@ -51,7 +54,7 @@ class EditUserForm extends React.Component {
                 placeholder={last_name}
                 value={this.state.last_name}
               />
-              <label for="email">Email</label>
+              <label>Email</label>
               <input
                 onChange={(event) => this.handleFormChange(event)}
                 type="text"
@@ -59,8 +62,7 @@ class EditUserForm extends React.Component {
                 placeholder={email}
                 value={this.state.email}
               />
-
-              <label for="street">Street</label>
+              <label>Street</label>
               <input
                 onChange={(event) => this.handleFormChange(event)}
                 type="text"
@@ -68,7 +70,7 @@ class EditUserForm extends React.Component {
                 placeholder={street}
                 value={this.state.street}
               />
-              <label for="city"> City</label>
+              <label>City</label>
               <input
                 onChange={(event) => this.handleFormChange(event)}
                 type="text"
@@ -76,7 +78,7 @@ class EditUserForm extends React.Component {
                 placeholder={city}
                 value={this.state.city}
               />
-              <label for="zipcode">Zip Code</label>
+              <label>Zip Code</label>
               <input
                 onChange={(event) => this.handleFormChange(event)}
                 type="text"
@@ -84,7 +86,7 @@ class EditUserForm extends React.Component {
                 placeholder={zipcode}
                 value={this.state.zipcode}
               />
-              <label for="state">State</label>
+              <label>State</label>
               <input
                 onChange={(event) => this.handleFormChange(event)}
                 type="text"
@@ -92,7 +94,7 @@ class EditUserForm extends React.Component {
                 placeholder={state}
                 value={this.state.state}
               />
-              <label for="img_url">Image</label>
+              <label>Image</label>
               <input
                 onChange={(event) => this.handleFormChange(event)}
                 type="text"
@@ -103,12 +105,11 @@ class EditUserForm extends React.Component {
             </div>
           </div>
           <div className="submit-button">
-            <input type="submit" value="Submit" className="btn" />
+            <input type="submit" value="Submit" className="submit-button-btn" />
           </div>
         </form>
       </div>
-    )
-      ;
+    );
   }
 }
 

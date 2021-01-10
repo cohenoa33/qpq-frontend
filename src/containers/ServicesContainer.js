@@ -8,7 +8,6 @@ class ServicesContainer extends Component {
   state = {
     services: [],
     service: {},
-    categories: [],
     cardClicked: false,
     sortByName: true,
     type: "all",
@@ -31,26 +30,9 @@ class ServicesContainer extends Component {
   componentDidMount = () => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:3000/api/v1/services")
-        .then((res) => res.json())
-        .then((services) => this.setState({ services: services }));
-
-      fetch("http://localhost:3000/api/v1/categories")
-        .then((res) => res.json())
-        .then((categories) => this.setState({ categories: categories }));
-
       this.setState({ token: token });
-      // this.renderSortBar()
     }
   };
-
-  // renderSortBar = () =>
-  //   (<SortBar
-  //     handelSortBy={this.handelSortBy}
-  //     sort={this.state.sortByName}
-  //     handleFilterByType={this.handleFilterByType}
-  //     categories={this.state.categories}
-  //   />)
 
   handelSortBy = (e) => {
     this.setState({ sortByName: !this.state.sortByName });
@@ -60,7 +42,7 @@ class ServicesContainer extends Component {
   };
 
   filterServicesByType = () => {
-    let services = this.state.services;
+    let services = this.props.services;
     switch (this.state.type) {
       case "services":
         return services.filter((service) => service.isService === true);
@@ -83,8 +65,8 @@ class ServicesContainer extends Component {
       });
     } else {
       this.filterServicesByType().sort(function (a, b) {
-        let nameA = a.name.toUpperCase(); // ignore upper and lowercase
-        let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        let nameA = a.name.toUpperCase();
+        let nameB = b.name.toUpperCase();
         if (nameA < nameB) {
           return -1;
         }
@@ -113,7 +95,6 @@ class ServicesContainer extends Component {
   };
 
   render() {
-    // console.log(this.state.services)
     return (
       <div>
         {this.state.cardClicked ? (
@@ -131,7 +112,6 @@ class ServicesContainer extends Component {
                 handelSortBy={this.handelSortBy}
                 sort={this.state.sortByName}
                 handleFilterByType={this.handleFilterByType}
-                categories={this.state.categories}
               />
             ) : null}
             <div className="service-container">

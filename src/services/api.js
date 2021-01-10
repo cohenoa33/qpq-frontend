@@ -1,4 +1,4 @@
-const API_ROOT = `http://localhost:3000/api/v1`;
+const API_ROOT = `https://qpq-server.herokuapp.com/api/v1/`;
 
 const token = localStorage.getItem("token");
 
@@ -56,7 +56,7 @@ const patchUserProfile = (userProfile, id) => {
     method: "PATCH",
     headers: headers,
     body: JSON.stringify(userProfile),
-  }).then((res) => res.json())
+  }).then((res) => res.json());
 };
 
 const postNewServiceOffering = (newService) => {
@@ -75,34 +75,27 @@ const handleDeleteButton = (id) => {
   }).then((res) => res.json());
 };
 
-
 const servicesForUser = (id) => {
   return fetch(`${API_ROOT}/users/${id}`, {
     headers: headers,
   }).then((res) => res.json());
-  }
-
+};
 
 const createRequest = (request) => {
   return fetch(`${API_ROOT}/requests`, {
     method: "POST",
     headers: headers,
-    body: JSON.stringify({ request:request })
-  })
-  .then((res) => res.json())
-}
+    body: JSON.stringify({ request: request }),
+  }).then((res) => res.json());
+};
 
-
-const persist =() => {
+const persist = () => {
   return fetch(`${API_ROOT}/persist`, {
     headers: {
       Authorization: `Bearer ${localStorage.token}`,
     },
-  })
-    .then((res) => res.json())
-}
-
-
+  }).then((res) => res.json());
+};
 
 export default {
   auth: {
@@ -113,13 +106,12 @@ export default {
   },
   services: {
     getServices,
-    servicesForUser
+    servicesForUser,
   },
   requests: {
     getRequests,
     patchRequestStatus,
-    createRequest
-
+    createRequest,
   },
   posts: {
     postNewServiceOffering,

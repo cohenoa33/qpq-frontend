@@ -15,8 +15,8 @@ class RequestsContainer extends Component {
     temp: "",
   };
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/requests")
-      .then((res) => res.json())
+    api.requests
+      .getRequests()
       .then((requests) => this.filterRequestsByUserId(requests));
 
     const token = localStorage.getItem("token");
@@ -76,11 +76,17 @@ class RequestsContainer extends Component {
   };
 
   render() {
+    const {
+      requestsToOthers,
+      requestsToMe,
+      archiveRequestToMe,
+      archiveRequestToOthers,
+    } = this.state;
     return (
       <div>
         <div>
           <h1>Perspective Offer</h1>
-          {this.state.requestsToMe.map((request) => (
+          {requestsToMe.map((request) => (
             <RequestCard
               key={request.index}
               request={request}
@@ -89,7 +95,7 @@ class RequestsContainer extends Component {
           ))}
 
           <h1>My Requests</h1>
-          {this.state.requestsToOthers.map((request) => (
+          {requestsToOthers.map((request) => (
             <PendingRequestCard
               key={request.id}
               request={request}
@@ -98,7 +104,7 @@ class RequestsContainer extends Component {
           ))}
 
           <h1>Archive</h1>
-          {this.state.archiveRequestToMe.map((request) => (
+          {archiveRequestToMe.map((request) => (
             <RequestCard
               key={request.id}
               request={request}
@@ -106,7 +112,7 @@ class RequestsContainer extends Component {
             />
           ))}
 
-          {this.state.archiveRequestToOthers.map((request) => (
+          {archiveRequestToOthers.map((request) => (
             <RequestCardToOthers
               key={request.id}
               request={request}
