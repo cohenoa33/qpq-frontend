@@ -4,7 +4,6 @@ import ServiceSpecs from "../components/ServiceSpecs";
 import SortBar from "../components/SortBar";
 import { withRouter } from "react-router-dom";
 
-
 class ServicesContainer extends Component {
   state = {
     services: [],
@@ -20,7 +19,6 @@ class ServicesContainer extends Component {
       service: serviceDetails,
       cardClicked: !this.state.cardClicked,
     });
-
   };
 
   specClick = () => {
@@ -43,10 +41,9 @@ class ServicesContainer extends Component {
 
       this.setState({ token: token });
       // this.renderSortBar()
-
     }
   };
-  
+
   // renderSortBar = () =>
   //   (<SortBar
   //     handelSortBy={this.handelSortBy}
@@ -54,63 +51,70 @@ class ServicesContainer extends Component {
   //     handleFilterByType={this.handleFilterByType}
   //     categories={this.state.categories}
   //   />)
-  
-  
-  
+
   handelSortBy = (e) => {
     this.setState({ sortByName: !this.state.sortByName });
   };
   handleFilterByType = (e) => {
     this.setState({ type: e.target.value });
   };
-  
+
   filterServicesByType = () => {
     let services = this.state.services;
     switch (this.state.type) {
       case "services":
         return services.filter((service) => service.isService === true);
-        
-        case "goods":
-          return services.filter((service) => service.isService !== true);
-          
-          case "all":
-            return services;
-            
-            default:
-              return services;
-            }
-          };
-          
-          sortServicesBy = () => {
-            if (!this.state.sortByName) {
-              return this.filterServicesByType().sort(function (a, b) {
-                return a.value - b.value;
-              });
-            } else {
-              this.filterServicesByType().sort(function (a, b) {
-                return a.name === b.name ? 0 : a.name < b.name ? -1 : 1;
-              });
-            }
-            return this.filterServicesByType();
-          };
-          
-          filterServicesBySearch = () => {
-            let search = this.props.search.toLowerCase();
-            if (search.length > 0) {
-              let filteredServices = this.sortServicesBy().filter(
-                (service) =>
-                service.name.toLowerCase().includes(search) ||
-                service.exchangeDescription.toLowerCase().includes(search) ||
-                service.offeringDescription.toLowerCase().includes(search)
-                );
-                return filteredServices;
-              }
-              return this.sortServicesBy();
-            };
-            
-            render() {
-              // console.log(this.state.services)
-              return (
+
+      case "goods":
+        return services.filter((service) => service.isService !== true);
+
+      case "all":
+        return services;
+
+      default:
+        return services;
+    }
+  };
+
+  sortServicesBy = () => {
+    if (!this.state.sortByName) {
+      return this.filterServicesByType().sort(function (a, b) {
+        return a.value - b.value;
+      });
+    } else {
+      this.filterServicesByType().sort(function (a, b) {
+        let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        return 0;
+      });
+    }
+    return this.filterServicesByType();
+  };
+
+  filterServicesBySearch = () => {
+    let search = this.props.search.toLowerCase();
+    if (search.length > 0) {
+      let filteredServices = this.sortServicesBy().filter(
+        (service) =>
+          service.name.toLowerCase().includes(search) ||
+          service.exchangeDescription.toLowerCase().includes(search) ||
+          service.offeringDescription.toLowerCase().includes(search)
+      );
+      return filteredServices;
+    }
+    return this.sortServicesBy();
+  };
+
+  render() {
+    // console.log(this.state.services)
+    return (
       <div>
         {this.state.cardClicked ? (
           <div className="specs-container">
@@ -121,31 +125,30 @@ class ServicesContainer extends Component {
             />{" "}
           </div>
         ) : (
-            <div>
-              {this.state.token ?
-                <SortBar
-                  handelSortBy={this.handelSortBy}
-                  sort={this.state.sortByName}
-                  handleFilterByType={this.handleFilterByType}
-                  categories={this.state.categories}
-                /> : null}
-              <div className="service-container">
-                {this.filterServicesBySearch().map((service) => (
-                  <ServiceCard
-                    service={service}
-                    key={service.id}
-                    cardClick={this.cardClick}
-                    renderOneService={this.props.renderOneService}
-                  />
-                ))}
-              </div>
+          <div>
+            {this.state.token ? (
+              <SortBar
+                handelSortBy={this.handelSortBy}
+                sort={this.state.sortByName}
+                handleFilterByType={this.handleFilterByType}
+                categories={this.state.categories}
+              />
+            ) : null}
+            <div className="service-container">
+              {this.filterServicesBySearch().map((service) => (
+                <ServiceCard
+                  service={service}
+                  key={service.id}
+                  cardClick={this.cardClick}
+                  renderOneService={this.props.renderOneService}
+                />
+              ))}
             </div>
-
-          )}
+          </div>
+        )}
       </div>
-    )
+    );
   }
-
 } // end pf class
 
-export default withRouter(ServicesContainer)
+export default withRouter(ServicesContainer);

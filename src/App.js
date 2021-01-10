@@ -28,19 +28,18 @@ class App extends React.Component {
 
   componentDidMount() {
     if (localStorage.token) {
-      api.auth.persist()
-        .then((json) => {
-
-          this.handleAuthResponse(json);
-        });
-    }else{
+      api.auth.persist().then((json) => {
+        this.handleAuthResponse(json);
+      });
+    } else {
       this.props.history.push("/login");
     }
   }
 
   handleLoginSubmit = (event, user) => {
     event.preventDefault();
-    api.auth.login(user)
+    api.auth
+      .login(user)
       .then((json) => {
         if (!json.error) {
           this.handleAuthResponse(json);
@@ -52,14 +51,13 @@ class App extends React.Component {
   };
   handleSignUpSubmit = (event, user) => {
     event.preventDefault();
-    api.auth.signup(user)
-      .then((json) => {
-        if (!json.error) {
-          this.handleAuthResponse(json);
-        } else {
-          alert(json.error);
-        }
-      });
+    api.auth.signup(user).then((json) => {
+      if (!json.error) {
+        this.handleAuthResponse(json);
+      } else {
+        alert(json.error);
+      }
+    });
   };
 
   handleAuthResponse = (response) => {
@@ -86,13 +84,21 @@ class App extends React.Component {
 
   handleSubmitNewServiceForm = (e) => {
     e.preventDefault();
-    let newService = this.state.newService;
+
+    let newService =
+      this.state.newService.img_url.length > 0
+        ? this.state.newService
+        : this.addImageToNewService(this.state.newService);
 
     api.posts.postNewServiceOffering(newService).then((data) => {
       alert(`${data.service.name} has been created`);
       this.props.history.push("/services");
     });
     e.target.reset();
+  };
+  addImageToNewService = (service) => {
+    service.img_url = "https://picsum.photos/200/300?random=5";
+    return service;
   };
 
   handleOnChangeNewServiceForm = (e) => {
@@ -108,12 +114,12 @@ class App extends React.Component {
   };
   //service stuff ends here
 
-
-  updateUserDetails =(user) => {
+  updateUserDetails = (user) => {
     this.setState({
-   ...this.state, 
-    user: user })
-  }
+      ...this.state,
+      user: user,
+    });
+  };
 
   // handleFormChange = (event) => {
   //   this.setState({
@@ -123,7 +129,6 @@ class App extends React.Component {
   //     },
   //   });
   // };
-
 
   renderLogin = () => (
     <Login
