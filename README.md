@@ -27,6 +27,9 @@ QPQ is a service-for-service trading web application, allowing users to create t
 ![approve and deny requests](https://media.giphy.com/media/gtIU5MXh5ievo3VzIZ/giphy.gif)
 - Users can delete their profile.
 
+## [Demo](https://qpq-client.herokuapp.com/)
+
+
 ## Build
 - React
 - HTML/CSS
