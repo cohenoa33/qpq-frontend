@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
-import Navbar from './Navbar';
+import React from "react";
+import Navbar from "./Navbar";
 
-
-class Header extends Component {
-
-
-  render() {
-    return (
-      <header className="header" >
-        <Navbar handleLogout={this.props.handleLogout}
-          handleSearch={this.props.handleSearch}
+export default function Header(props) {
+  return (
+    <div>
+      <header className="header">
+        <Navbar
+          handleLogout={props.handleLogout}
+          handleSearch={props.handleSearch}
         />
         <div className="header-image-cropper">
-          <img src="https://i.ytimg.com/vi/RCSTnK1gfzs/maxresdefault.jpg"
-            className="header-pic" alt="" />
+          <img
+            src="https://i.ytimg.com/vi/RCSTnK1gfzs/maxresdefault.jpg"
+            className="header-pic"
+            alt=""
+          />
         </div>
         <span className="text-center">QPQ</span>
       </header>
-    );
-  }
-
+    </div>
+  );
 }
-
-export default Header;

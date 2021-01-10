@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import api from "../services/api";
 
 export default class Login extends React.Component {
   state = {

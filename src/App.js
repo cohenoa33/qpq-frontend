@@ -15,6 +15,7 @@ class App extends React.Component {
   state = {
     user: {},
     search: "",
+    services: [],
     newService: {
       name: "",
       value: "",
@@ -28,19 +29,22 @@ class App extends React.Component {
 
   componentDidMount() {
     if (localStorage.token) {
-      api.auth.persist()
-        .then((json) => {
+      api.auth.persist().then((json) => {
+        this.handleAuthResponse(json);
 
-          this.handleAuthResponse(json);
-        });
-    }else{
+        api.services
+          .getServices()
+          .then((services) => this.setState({ services: services }));
+      });
+    } else {
       this.props.history.push("/login");
     }
   }
 
   handleLoginSubmit = (event, user) => {
     event.preventDefault();
-    api.auth.login(user)
+    api.auth
+      .login(user)
       .then((json) => {
         if (!json.error) {
           this.handleAuthResponse(json);
@@ -52,14 +56,13 @@ class App extends React.Component {
   };
   handleSignUpSubmit = (event, user) => {
     event.preventDefault();
-    api.auth.signup(user)
-      .then((json) => {
-        if (!json.error) {
-          this.handleAuthResponse(json);
-        } else {
-          alert(json.error);
-        }
-      });
+    api.auth.signup(user).then((json) => {
+      if (!json.error) {
+        this.handleAuthResponse(json);
+      } else {
+        alert(json.error);
+      }
+    });
   };
 
   handleAuthResponse = (response) => {
@@ -88,11 +91,30 @@ class App extends React.Component {
     e.preventDefault();
     let newService = this.state.newService;
 
-    api.posts.postNewServiceOffering(newService).then((data) => {
-      alert(`${data.service.name} has been created`);
-      this.props.history.push("/services");
-    });
-    e.target.reset();
+    if (
+      newService.name &&
+      newService.value &&
+      newService.offeringDescription &&
+      newService.exchangeDescription
+    ) {
+      let newServiceUpdate = newService.img_url
+        ? newService
+        : this.addImageToNewService(newService);
+      api.posts.postNewServiceOffering(newServiceUpdate).then((data) => {
+        alert(`${data.service.name} has been created`);
+        let updateServices = this.state.services.concat(data.service);
+        this.setState({ services: updateServices });
+        this.props.history.push("/services");
+      });
+    } else {
+      alert(
+        "New Service is not valid: make sure you added name, value, description and what you want in exchange."
+      );
+    }
+  };
+  addImageToNewService = (service) => {
+    service.img_url = "https://picsum.photos/200/300?random=5";
+    return service;
   };
 
   handleOnChangeNewServiceForm = (e) => {
@@ -106,24 +128,13 @@ class App extends React.Component {
       },
     }));
   };
-  //service stuff ends here
 
-
-  updateUserDetails =(user) => {
+  updateUserDetails = (user) => {
     this.setState({
-   ...this.state, 
-    user: user })
-  }
-
-  // handleFormChange = (event) => {
-  //   this.setState({
-  //     user: {
-  //       ...this.state.user,
-  //       [event.target.name]: event.target.value,
-  //     },
-  //   });
-  // };
-
+      ...this.state,
+      user: user,
+    });
+  };
 
   renderLogin = () => (
     <Login
@@ -141,6 +152,7 @@ class App extends React.Component {
     <ServicesContainer
       search={this.state.search}
       currentUser={this.state.user}
+      services={this.state.services}
     />
   );
   renderProfilePage = () => (
@@ -158,11 +170,14 @@ class App extends React.Component {
   );
 
   renderNewService = () => (
-    <ServiceNew
-      newService={this.state.newService}
-      handleSubmitNewServiceForm={this.handleSubmitNewServiceForm}
-      handleOnChangeNewServiceForm={this.handleOnChangeNewServiceForm}
-    />
+    <>
+      <br />
+      <ServiceNew
+        newService={this.state.newService}
+        handleSubmitNewServiceForm={this.handleSubmitNewServiceForm}
+        handleOnChangeNewServiceForm={this.handleOnChangeNewServiceForm}
+      />
+    </>
   );
 
   render() {

@@ -1,15 +1,12 @@
 import React from "react";
 
 const ServiceCard = (props) => {
-  const { name, offeringDescription, img_url, value, id } = props.service;
+  const { name, offeringDescription, img_url, value } = props.service;
 
   const serviceDetails = props.service;
 
   return (
-    <div
-      className="card"
-      onClick={(e) => props.cardClick(e, serviceDetails)}
-    >
+    <div className="card" onClick={(e) => props.cardClick(e, serviceDetails)}>
       <div className="name">{name}</div>
 
       <div className="image">
@@ -29,10 +26,9 @@ const ServiceCard = (props) => {
             ))}
           </div>
         ) : (
-            "No Category"
-          )}
+          "No Category"
+        )}
       </div>
-
     </div>
   );
 };

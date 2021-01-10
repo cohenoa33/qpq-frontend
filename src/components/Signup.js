@@ -11,7 +11,8 @@ class Signup extends React.Component {
       zipcode: "",
       birth_year: "",
       state: "",
-      img_url: "",
+      img_url:
+        "https://www.searchpng.com/wp-content/uploads/2019/02/Profile-PNG-Icon-715x715.png",
       email: "",
       password: "",
       password_confirmation: "",
@@ -27,6 +28,19 @@ class Signup extends React.Component {
   };
 
   render() {
+    const {
+      img_url,
+      first_name,
+      last_name,
+      street,
+      city,
+      zipcode,
+      state,
+      email,
+      password,
+      password_confirmation,
+      birth_year,
+    } = this.state;
     return (
       <div className="form-container">
         <form
@@ -39,50 +53,45 @@ class Signup extends React.Component {
                 type="text"
                 name="first_name"
                 placeholder="First Name"
-                value={this.state.first_name}
+                value={first_name}
               />
               <input
                 type="text"
                 name="last_name"
                 placeholder="Last Name"
-                value={this.state.last_name}
+                value={last_name}
               />
               <input
                 type="text"
                 name="street"
                 placeholder="Street"
-                value={this.state.street}
+                value={street}
               />
-              <input
-                type="text"
-                name="city"
-                placeholder="City"
-                value={this.state.city}
-              />
+              <input type="text" name="city" placeholder="City" value={city} />
               <input
                 type="text"
                 name="zipcode"
                 placeholder="Zip Code"
-                value={this.state.zipcode}
+                value={zipcode}
               />
               <input
                 type="text"
                 name="state"
                 placeholder="State"
-                value={this.state.state}
+                value={state}
               />
               <input
                 type="text"
                 name="img_url"
                 placeholder="Image URL"
-                value={this.state.img_url}
+                value={img_url}
               />
               <input
                 type="number"
                 name="birth_year"
                 placeholder="Birth Year"
                 defaultValue="1999"
-                value={this.state.birth_year}
+                value={birth_year}
               />
             </div>
 
@@ -91,24 +100,24 @@ class Signup extends React.Component {
                 type="text"
                 name="email"
                 placeholder="Email"
-                value={this.state.email}
+                value={email}
               />
               <input
                 type="password"
                 name="password"
                 placeholder="Password"
-                value={this.state.password}
+                value={password}
               />
               <input
                 type="password"
                 name="password_confirmation"
                 placeholder="password Confirmation"
-                value={this.state.password_confirmation}
+                value={password_confirmation}
               />
             </div>
           </div>
 
-          <div className="submit-button">
+          <div className="signup-submit-button">
             <input type="submit" value="Submit" className="btn" />
           </div>
         </form>

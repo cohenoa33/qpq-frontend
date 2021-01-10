@@ -290,6 +290,12 @@ input[type="text"].service-message {
   background: #1a436b;
   padding: 10px;
 }
+.profile-one-column-grid {
+  width: 75%;
+  margin: 0 auto;
+  background: #1a436b;
+  padding: 10px;
+}
 .register-form {
   background: #1a436b;
   width: 75%;
@@ -298,12 +304,15 @@ input[type="text"].service-message {
 }
 .form-container {
   padding: 50px;
+  padding-top: 16px;
 }
 
 .row {
   flex: 50%;
 }
-
+.buttons-row {
+  display: grid;
+}
 .row .edit-profile-button {
   padding: 6px 10px;
   margin-top: 1px;
@@ -316,7 +325,7 @@ input[type="text"].service-message {
 
 .row .delete-profile-button {
   padding: 6px 10px;
-  margin-top: 1px;
+  margin-top: 5px;
   background: #ddd;
   font-size: 17px;
   border: none;
@@ -326,26 +335,26 @@ input[type="text"].service-message {
 
 .profile-page-image {
   width: 50%;
-  float: right;
+  /* float: right; */
+  padding-top: 50px;
+  max-width: 200px;
+  height: auto;
 }
 
 .profile-form-row {
   padding-top: 16px;
   flex: 100%;
-  width: auto;
   color: white;
-
   flex-flow: row wrap;
   display: flex;
   align-items: center;
   padding-top: 16px;
-  width: auto;
+  width: 60%;
   color: white;
   margin: 0 auto;
   background: #1a436b;
-  width: 50%;
   padding: 16px;
-  /* display: block; */
+  display: block;
   position: relative;
   color: white;
 }
@@ -393,24 +402,38 @@ input[type="text"].service-message {
 .new-service-form textarea {
   margin: 0 auto;
   width: 90%;
-  margin-bottom: 20px;
-  padding: 12px;
+  margin-bottom: 10px;
+  padding: 4px;
   border: 1px solid #ccc;
   border-radius: 3px;
 }
 
 label {
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   display: block;
 }
-
 .submit-button {
-  background: white;
-  padding: 15px;
+  background: transparent;
+}
+.signup-submit-button {
+  background: transparent;
+  margin-top: 5px;
+}
+.submit-button-new-service {
+  background: transparent;
+  margin: 0 auto;
 }
 .btn {
   background: #1a436b;
   color: white;
+  border-radius: 5px;
+  font-size: 20px;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+}
+.submit-button-btn {
+  color: #1a436b;
   border-radius: 5px;
   font-size: 20px;
   border: none;
