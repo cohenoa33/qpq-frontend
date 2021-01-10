@@ -18,8 +18,7 @@ QPQ is a service-for-service trading web application, allowing users to create t
 - Users can create a card for their own service / goods they want to exchange.
 - Users can search for a specific service 
 <br><br/>
-![search feature](https://media.giphy.com/media/1NUk3tIAOWkN1MVSB5/giphy.gifse
-)
+![search feature](https://media.giphy.com/media/1NUk3tIAOWkN1MVSB5/giphy.gifse)
 - Users can request other services / goods from other users
 <br><br/>
 ![request service](https://media.giphy.com/media/cU1c6qvApf10riWyrt/giphy.gif)
