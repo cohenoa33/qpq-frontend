@@ -34,7 +34,9 @@ class RequestsContainer extends Component {
       (request) => request.id !== requestDetails.id
     );
     api.requests.patchRequestStatus(value, requestDetails.id).then((data) => {
-      this.setState({ archiveRequestToMe: [...this.state.archiveRequestToMe, data] });
+      this.setState({
+        archiveRequestToMe: [...this.state.archiveRequestToMe, data],
+      });
       this.setState({ requestsToMe: updateRequests });
     });
   };
