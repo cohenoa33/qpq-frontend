@@ -1,6 +1,4 @@
 {
-  
-  "homepage": "http://cohenoa33.github.io/qpq-frontend",
   "name": "qpq-frontend",
   "version": "0.1.0",
   "private": true,
@@ -18,8 +16,6 @@
     "semantic-ui-css": "^2.4.1"
   },
   "scripts": {
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build",
     "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
