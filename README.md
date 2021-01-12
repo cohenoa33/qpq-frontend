@@ -27,7 +27,7 @@ QPQ is a service-for-service trading web application, allowing users to create t
 ![approve and deny requests](https://media.giphy.com/media/gtIU5MXh5ievo3VzIZ/giphy.gif)
 - Users can delete their profile.
 
-## [Demo](https://qpq-client.herokuapp.com/)
+## [Live App](https://qpq-client.herokuapp.com/)
 
 
 ## Build
@@ -46,4 +46,4 @@ Akiko Green: https://github.com/keeks5456
 Brad Beggs: https://github.com/bdb2381
  
  ## Backend
- https://github.com/cohenoa33/qpq-backend
+ [GitHub repo](https://github.com/cohenoa33/qpq-backend)
