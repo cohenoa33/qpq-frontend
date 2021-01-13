@@ -60,6 +60,11 @@ export default class Login extends React.Component {
               by Noa, Nathan, Akiko & Brad
             </b>
           </p>
+          <p>
+            For checking QPQ without signing up:
+            <br /> Email: hello@gmail.com
+            <br /> Password: 123
+          </p>
         </div>
       </div>
     );
