@@ -60,13 +60,13 @@ const UserInfo = (props) => {
                   {" "}
                   Edit My Profile{" "}
                 </button>
-                <button
+                {/* <button
                   className="delete-profile-button"
                   onClick={() => props.handleUserDelete(props.user)}
                 >
                   {" "}
                   Delete My Profile
-                </button>
+                </button> */}
               </div>
             ) : null}
           </div>
