@@ -36,18 +36,18 @@ class ProfilePage extends React.Component {
     });
   };
 
-  handleUserDelete = (user) => {
-    api.users
-      .handleDeleteButton(user.id)
+  // handleUserDelete = (user) => {
+  //   api.users
+  //     .handleDeleteButton(user.id)
 
-      .then((data) => {
-        console.log(data);
-        if (!data.error) {
-          localStorage.removeItem("token");
-          this.props.history.push("/login");
-        }
-      });
-  };
+  //     .then((data) => {
+  //       console.log(data);
+  //       if (!data.error) {
+  //         localStorage.removeItem("token");
+  //         this.props.history.push("/login");
+  //       }
+  //     });
+  // };
 
   render() {
     return (
@@ -59,7 +59,7 @@ class ProfilePage extends React.Component {
             <UserInfo
               user={this.props.user}
               handleEditButton={this.handleEditButton}
-              handleUserDelete={this.handleUserDelete}
+              // handleUserDelete={this.handleUserDelete}
               editDisable={this.state.editDisable}
             />
           </div>

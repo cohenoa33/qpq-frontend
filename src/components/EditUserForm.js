@@ -54,14 +54,14 @@ class EditUserForm extends React.Component {
                 placeholder={last_name}
                 value={this.state.last_name}
               />
-              <label>Email</label>
+              {/* <label>Email</label>
               <input
                 onChange={(event) => this.handleFormChange(event)}
                 type="text"
                 name="email"
                 placeholder={email}
                 value={this.state.email}
-              />
+              /> */}
               <label>Street</label>
               <input
                 onChange={(event) => this.handleFormChange(event)}
