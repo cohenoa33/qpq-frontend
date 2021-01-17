@@ -62,7 +62,7 @@ export default class Login extends React.Component {
           </p>
           <p>
             For checking QPQ without signing up:
-            <br /> Email: hello@gmail.com
+            <br /> Email: hello@mail.com
             <br /> Password: 123
           </p>
         </div>
